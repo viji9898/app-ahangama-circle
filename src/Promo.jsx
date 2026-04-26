@@ -145,7 +145,9 @@ export default function Promo() {
     }
 
     if (isOwnerRequest && !requestAccessState.venueName.trim()) {
-      setRequestAccessError("Please add the venue name for owner applications.");
+      setRequestAccessError(
+        "Please add the venue name for owner applications.",
+      );
       return;
     }
 
@@ -172,7 +174,9 @@ export default function Promo() {
         throw new Error(data.error || "Failed to send request.");
       }
 
-      setRequestAccessSuccess("Request received. The concierge team will be in touch.");
+      setRequestAccessSuccess(
+        "Request received. The concierge team will be in touch.",
+      );
       setRequestAccessState({
         name: "",
         email: "",
