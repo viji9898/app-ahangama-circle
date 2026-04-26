@@ -199,16 +199,27 @@ export default function Promo() {
             <section className="circle-section circle-section--statement">
               <div className="circle-section__inner circle-section__inner--narrow circle-section__inner--centered">
                 <p className="circle-section__eyebrow">What this is</p>
-                <h2 className="circle-section__title">A private circle in Ahangama</h2>
+                <h2 className="circle-section__title">
+                  A private circle in Ahangama
+                </h2>
                 <p className="circle-section__body">
-                  A curated network of owners, founders, and creatives — recognised
-                  across the places that matter.
+                  A curated network of owners, founders, and creatives —
+                  recognised across the places that matter.
                 </p>
-                <p className="circle-section__subtle">Not public. Not for everyone.</p>
+                <p className="circle-section__body circle-section__body--supporting">
+                  Supported by a private concierge that connects members across
+                  the Circle.
+                </p>
+                <p className="circle-section__subtle">
+                  Not public. Not for everyone.
+                </p>
               </div>
             </section>
 
-            <section id="how-it-works" className="circle-section circle-section--steps">
+            <section
+              id="how-it-works"
+              className="circle-section circle-section--steps"
+            >
               <div className="circle-section__inner">
                 <p className="circle-section__eyebrow">How it works</p>
                 <div className="circle-steps">
@@ -225,7 +236,39 @@ export default function Promo() {
                   <article className="circle-step">
                     <span className="circle-step__number">03 — Enjoy</span>
                     <h3 className="circle-step__title">Enjoy</h3>
-                    <p className="circle-step__text">Benefits and community</p>
+                    <p className="circle-step__text">
+                      Benefits, coordination, and community
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </section>
+
+            <section className="circle-section circle-section--concierge-strip">
+              <div className="circle-section__inner">
+                <div
+                  className="circle-strip"
+                  aria-label="Circle access details"
+                >
+                  <article className="circle-strip__item">
+                    <h3 className="circle-strip__title">Private concierge</h3>
+                    <p className="circle-strip__text">
+                      Coordinated access across the Circle
+                    </p>
+                  </article>
+                  <article className="circle-strip__item">
+                    <h3 className="circle-strip__title">
+                      Preferred member pricing
+                    </h3>
+                    <p className="circle-strip__text">
+                      Available across selected services
+                    </p>
+                  </article>
+                  <article className="circle-strip__item">
+                    <h3 className="circle-strip__title">Introductions</h3>
+                    <p className="circle-strip__text">
+                      Connect with owners and creatives
+                    </p>
                   </article>
                 </div>
               </div>
@@ -234,7 +277,9 @@ export default function Promo() {
             <section className="circle-section circle-section--venues">
               <div className="circle-section__inner">
                 <p className="circle-section__eyebrow">Recognised across</p>
-                <h2 className="circle-section__title">Recognised across Ahangama</h2>
+                <h2 className="circle-section__title">
+                  Recognised across Ahangama
+                </h2>
                 <p className="circle-section__subtle">Selected places</p>
                 <div className="circle-venues" aria-label="Selected partners">
                   {partnerVenues.map((venue) => (
@@ -246,34 +291,51 @@ export default function Promo() {
               </div>
             </section>
 
-            <section id="membership" className="circle-section circle-section--membership">
+            <section
+              id="membership"
+              className="circle-section circle-section--membership"
+            >
               <div className="circle-section__inner circle-section__inner--centered">
                 <p className="circle-section__eyebrow">Membership</p>
                 <h2 className="circle-section__title">Membership</h2>
                 <h2 className="circle-membership__price">$250 / year</h2>
                 <p className="circle-section__body circle-section__body--membership">
                   Founding Members — limited
-                  <br />
-                  A small number will be invited to join with a complimentary
-                  first year
+                  <br />A small number will be invited to join with a
+                  complimentary first year
+                </p>
+                <p className="circle-section__subtle circle-section__subtle--membership">
+                  Members receive preferred access and pricing across the Circle
                 </p>
                 <p className="circle-section__subtle">By inquiry only</p>
                 <a href={inquiryUrl} className="circle-cta circle-cta--primary">
                   Request access
                 </a>
+                <p className="circle-cta__microcopy">
+                  Handled privately via concierge
+                </p>
               </div>
             </section>
 
-            <section id="final-cta" className="circle-section circle-section--final-cta">
+            <section
+              id="final-cta"
+              className="circle-section circle-section--final-cta"
+            >
               <div className="circle-section__inner circle-section__inner--centered circle-final-cta">
                 <p className="circle-section__eyebrow">Ahangama Circle</p>
                 <h2 className="circle-section__title">Join the Circle</h2>
                 <p className="circle-section__subtle">
                   For those building, creating, and calling Ahangama home
                 </p>
-                <a href={inquiryUrl} className="circle-cta circle-cta--inverted">
+                <a
+                  href={inquiryUrl}
+                  className="circle-cta circle-cta--inverted"
+                >
                   Request access
                 </a>
+                <p className="circle-cta__microcopy">
+                  Handled privately via concierge
+                </p>
               </div>
             </section>
           </div>

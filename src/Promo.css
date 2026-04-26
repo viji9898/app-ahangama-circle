@@ -217,6 +217,14 @@
   line-height: 1.6;
 }
 
+.circle-section__body--supporting {
+  margin-top: 18px;
+  max-width: 32ch;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
 .circle-section__body--membership {
   max-width: 34ch;
   font-size: 18px;
@@ -228,6 +236,12 @@
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.circle-section__subtle--membership {
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 12px;
 }
 
 .circle-section--statement {
@@ -267,6 +281,40 @@
   color: rgba(255, 255, 255, 0.62);
   font-size: 15px;
   line-height: 1.45;
+}
+
+.circle-section--concierge-strip {
+  padding-top: 24px;
+  padding-bottom: 112px;
+}
+
+.circle-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.circle-strip__item {
+  text-align: center;
+}
+
+.circle-strip__title {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.circle-strip__text {
+  margin: 10px auto 0;
+  max-width: 18ch;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .circle-venues {
@@ -322,6 +370,14 @@
   transform: translateY(-1px);
 }
 
+.circle-cta__microcopy {
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .circle-cta--primary {
   border: 1px solid rgba(255, 255, 255, 0.92);
   background: rgba(255, 255, 255, 0.94);
@@ -362,6 +418,10 @@
     font-size: 17px;
   }
 
+  .circle-section__body--supporting {
+    font-size: 15px;
+  }
+
   .circle-steps {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -373,6 +433,11 @@
 
   .circle-venues {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .circle-strip {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .circle-final-cta {

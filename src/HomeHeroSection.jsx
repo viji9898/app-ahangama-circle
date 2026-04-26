@@ -32,6 +32,10 @@ export default function HomeHeroSection({
                   Request access
                 </a>
               </div>
+
+              <p className="new-home-hero__microcopy">
+                Handled privately via concierge
+              </p>
             </div>
           </div>
 
