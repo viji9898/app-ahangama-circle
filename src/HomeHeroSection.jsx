@@ -3,6 +3,7 @@ import "./HomeHeroSection.css";
 export default function HomeHeroSection({
   heroPassImage,
   membershipUrl = "mailto:hello@ahangama.com?subject=Ahangama%20Circle%20Membership%20Inquiry",
+  onRequestAccessClick,
 }) {
   return (
     <section id="hero" className="new-home-hero" aria-label="Hero">
@@ -28,6 +29,7 @@ export default function HomeHeroSection({
                 <a
                   className="new-home-hero__button new-home-hero__button--primary"
                   href={membershipUrl}
+                  onClick={onRequestAccessClick}
                 >
                   Request access
                 </a>

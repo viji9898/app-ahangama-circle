@@ -26,6 +26,14 @@ function subtractUtcDays(dateValue, days) {
   return date;
 }
 
+function trackGaEvent(eventName, parameters) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", eventName, parameters);
+}
+
 export default function Promo() {
   const inquiryUrl = "#join-circle";
   const heroAssets = {
@@ -118,6 +126,16 @@ export default function Promo() {
 
   const isOwnerRequest = requestAccessState.memberType === "owner";
 
+  const handleRequestAccessClick = (placement) => {
+    trackGaEvent("request_access_click", {
+      event_category: "engagement",
+      event_label: placement,
+      link_target: "join_circle_form",
+      cta_text: "Request access",
+      placement,
+    });
+  };
+
   const handleRequestAccessChange = (event) => {
     const { name, value } = event.target;
 
@@ -173,6 +191,15 @@ export default function Promo() {
       if (!response.ok || data.error) {
         throw new Error(data.error || "Failed to send request.");
       }
+
+      trackGaEvent("request_access_form_submit", {
+        event_category: "lead",
+        event_label: requestAccessState.memberType,
+        form_name: "join_circle_request_access",
+        member_type: requestAccessState.memberType,
+        has_venue_name:
+          isOwnerRequest && Boolean(requestAccessState.venueName.trim()),
+      });
 
       setRequestAccessSuccess(
         "Request received. The concierge team will be in touch.",
@@ -273,6 +300,7 @@ export default function Promo() {
             <HomeHeroSection
               heroPassImage={heroAssets.heroPassImage}
               membershipUrl={inquiryUrl}
+              onRequestAccessClick={() => handleRequestAccessClick("hero")}
             />
             <section className="circle-section circle-section--statement">
               <div className="circle-section__inner circle-section__inner--narrow circle-section__inner--centered">
@@ -386,7 +414,11 @@ export default function Promo() {
                   Members receive preferred access and pricing across the Circle
                 </p>
                 <p className="circle-section__subtle">By inquiry only</p>
-                <a href={inquiryUrl} className="circle-cta circle-cta--primary">
+                <a
+                  href={inquiryUrl}
+                  className="circle-cta circle-cta--primary"
+                  onClick={() => handleRequestAccessClick("membership")}
+                >
                   Request access
                 </a>
                 <p className="circle-cta__microcopy">
