@@ -45,16 +45,7 @@ export default function Promo() {
   const [requestAccessSuccess, setRequestAccessSuccess] = React.useState("");
   const [requestAccessSubmitting, setRequestAccessSubmitting] =
     React.useState(false);
-  const partnerVenues = [
-    "The Kip",
-    "Cactus",
-    "Black Honey",
-    "Hotel de Uncles",
-    "Kabalana Hotel",
-    "Marshmellow Beach",
-    "Lamana",
-    "Soul & Surf",
-  ];
+  const partnerVenues = [];
 
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
