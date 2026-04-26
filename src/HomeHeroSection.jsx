@@ -1,10 +1,8 @@
 import "./HomeHeroSection.css";
 
 export default function HomeHeroSection({
-  appleWalletIcon,
-  googleWalletIcon,
   heroPassImage,
-  passUrl = "https://pass.ahangama.com",
+  membershipUrl = "mailto:hello@ahangama.com?subject=Ahangama%20Circle%20Membership%20Inquiry",
 }) {
   return (
     <section id="hero" className="new-home-hero" aria-label="Hero">
@@ -14,58 +12,25 @@ export default function HomeHeroSection({
             <div className="new-home-hero__copy">
               <span className="new-home-hero__eyebrow">Ahangama Circle</span>
 
-              <h1 className="new-home-hero__title">
-                Save $50-$150 on your Ahangama trip
-              </h1>
+              <h1 className="new-home-hero__title">The Ahangama Circle</h1>
 
               <p className="new-home-hero__description">
-                One pass. Instant discounts at 100+ places.
+                A private network of owners and creatives.
+                <br />
+                Recognised. Connected. Looked after.
               </p>
 
               <p className="new-home-hero__micro-proof">
-                Cafes • Stays • Surf • Wellness
+                Owners • Founders • Creatives
               </p>
 
               <div className="new-home-hero__actions">
                 <a
                   className="new-home-hero__button new-home-hero__button--primary"
-                  href={passUrl}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={membershipUrl}
                 >
-                  Get your pass
+                  Request access
                 </a>
-
-                <a
-                  className="new-home-hero__button new-home-hero__button--secondary"
-                  href="#how-it-works"
-                >
-                  See how it works
-                </a>
-              </div>
-
-              <p className="new-home-hero__trust-line">
-                Works instantly • No app needed • Takes 30 seconds
-              </p>
-
-              <div className="new-home-hero__wallet-support">
-                <div className="new-home-hero__wallet-item">
-                  <span>Add to Wallet</span>
-
-                  <img
-                    src={appleWalletIcon}
-                    alt="Apple Wallet"
-                    className="new-home-hero__wallet-icon"
-                    draggable={false}
-                  />
-
-                  <img
-                    src={googleWalletIcon}
-                    alt="Google Wallet"
-                    className="new-home-hero__wallet-icon"
-                    draggable={false}
-                  />
-                </div>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: url('/background.jpg') center center / cover no-repeat fixed, #f7f3ef;
+  background: #000;
 }
 
 .promo-page__content {
@@ -21,7 +21,7 @@
   width: 100vw;
   flex-direction: column;
   align-items: center;
-  padding: 2em 1em 3em;
+  padding: 0 1.5em 4em;
 }
 
 .promo-page__content--landing {
@@ -35,9 +35,9 @@
 .promo-page__stack {
   display: flex;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   flex-direction: column;
-  gap: 24px;
+  gap: 0;
 }
 
 .promo-card {
@@ -167,12 +167,215 @@
   white-space: pre-wrap;
 }
 
+.circle-section {
+  padding: 112px 0;
+}
+
+.circle-section__inner {
+  width: 100%;
+  padding: 0 8px;
+}
+
+.circle-section__inner--narrow {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.circle-section__inner--centered {
+  text-align: center;
+}
+
+.circle-section__eyebrow {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.circle-section__title {
+  margin: 0;
+  max-width: 12ch;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.circle-section__inner--centered .circle-section__title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.circle-section__body {
+  margin: 30px auto 0;
+  max-width: 30ch;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.circle-section__body--membership {
+  max-width: 34ch;
+  font-size: 18px;
+}
+
+.circle-section__subtle {
+  margin: 24px 0 0;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.circle-section--statement {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.circle-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.circle-step {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.circle-step__number {
+  display: block;
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.circle-step__title {
+  margin: 16px 0 8px;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.circle-step__text {
+  margin: 0;
+  max-width: 12ch;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.circle-venues {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px 30px;
+  margin-top: 40px;
+}
+
+.circle-venues__item {
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 18px;
+  letter-spacing: -0.03em;
+}
+
+.circle-section--membership .circle-section__title,
+.circle-section--venues .circle-section__title,
+.circle-section--final-cta .circle-section__title {
+  max-width: 14ch;
+}
+
+.circle-membership__price {
+  margin: 20px 0 0;
+  color: rgba(255, 255, 255, 0.98);
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
+
+.circle-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  margin-top: 28px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.circle-cta:hover {
+  transform: translateY(-1px);
+}
+
+.circle-cta--primary {
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
+  color: #050505;
+}
+
+.circle-cta--inverted {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.circle-section--final-cta {
+  padding-top: 24px;
+}
+
+.circle-final-cta {
+  padding: 112px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
 @media (max-width: 767px) {
   .promo-page__content {
-    padding: 1.5em 1em 2.5em;
+    padding: 0 1em 3em;
   }
 
   .promo-card {
     padding: 1.5em 1em 1.25em;
+  }
+
+  .circle-section {
+    padding: 84px 0;
+  }
+
+  .circle-section__body {
+    font-size: 17px;
+  }
+
+  .circle-steps {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .circle-step__text {
+    max-width: 14ch;
+  }
+
+  .circle-venues {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .circle-final-cta {
+    padding: 64px 24px;
   }
 }

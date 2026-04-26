@@ -2,20 +2,6 @@ import React from "react";
 import HomeHeroSection from "./HomeHeroSection.jsx";
 import "./Promo.css";
 
-function getTimeZoneDateString(timeZone) {
-  const formatter = new Intl.DateTimeFormat("en-CA", {
-    timeZone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  const parts = formatter.formatToParts(new Date());
-  const year = parts.find((part) => part.type === "year")?.value;
-  const month = parts.find((part) => part.type === "month")?.value;
-  const day = parts.find((part) => part.type === "day")?.value;
-  return `${year}-${month}-${day}`;
-}
-
 function addDaysToYmd(ymd, days) {
   const date = new Date(`${ymd}T00:00:00Z`);
   date.setUTCDate(date.getUTCDate() + days);
@@ -41,18 +27,24 @@ function subtractUtcDays(dateValue, days) {
 }
 
 export default function Promo() {
+  const inquiryUrl =
+    "mailto:hello@ahangama.com?subject=Ahangama%20Circle%20Membership%20Inquiry";
   const heroAssets = {
-    appleWalletIcon: "/assets/add_to_apple_wallet.png",
-    googleWalletIcon: "/assets/add_to_google_wallet.png",
     heroPassImage: "/assets/hero_pass_apple_wallet.png",
   };
-  const todayStr = getTimeZoneDateString("Asia/Colombo");
-  const maxDateStr = addDaysToYmd(todayStr, 60);
-  const [startDate, setStartDate] = React.useState(todayStr);
-  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
   const [successLoading, setSuccessLoading] = React.useState(false);
   const [promoStatus, setPromoStatus] = React.useState(null);
+  const partnerVenues = [
+    "The Kip",
+    "Cactus",
+    "Black Honey",
+    "Hotel de Uncles",
+    "Kabalana Hotel",
+    "Marshmellow Beach",
+    "Lamana",
+    "Soul & Surf",
+  ];
 
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -201,74 +193,89 @@ export default function Promo() {
         ) : (
           <div className="promo-page__stack">
             <HomeHeroSection
-              appleWalletIcon={heroAssets.appleWalletIcon}
-              googleWalletIcon={heroAssets.googleWalletIcon}
               heroPassImage={heroAssets.heroPassImage}
+              membershipUrl={inquiryUrl}
             />
-            <div id="how-it-works" className="promo-card promo-card--checkout">
-              <img
-                src="https://customer-apps-techhq.s3.eu-west-2.amazonaws.com/app-ahangama-demo/ahangama_pass_logo.png"
-                alt="Ahangama Pass Logo"
-                className="promo-card__logo"
-              />
-              <h1 className="promo-card__title">Ahangama Circle</h1>
-              <p className="promo-card__text">
-                15 day pass with a 5 day trial and any time access.
-              </p>
-              <div className="promo-card__field">
-                <label htmlFor="promo-start-date" className="promo-card__label">
-                  Start Date:
-                </label>
-                <input
-                  id="promo-start-date"
-                  type="date"
-                  value={startDate}
-                  onChange={(event) => setStartDate(event.target.value)}
-                  min={todayStr}
-                  max={maxDateStr}
-                  required
-                  className="promo-card__input"
-                />
+            <section className="circle-section circle-section--statement">
+              <div className="circle-section__inner circle-section__inner--narrow circle-section__inner--centered">
+                <p className="circle-section__eyebrow">What this is</p>
+                <h2 className="circle-section__title">A private circle in Ahangama</h2>
+                <p className="circle-section__body">
+                  A curated network of owners, founders, and creatives — recognised
+                  across the places that matter.
+                </p>
+                <p className="circle-section__subtle">Not public. Not for everyone.</p>
               </div>
-              <button
-                type="button"
-                disabled={loading}
-                onClick={async () => {
-                  setLoading(true);
-                  setError("");
+            </section>
 
-                  try {
-                    const response = await fetch(
-                      "/.netlify/functions/create-promo-checkout-session",
-                      {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ startDate }),
-                      },
-                    );
-                    const data = await response.json();
-
-                    if (response.ok && data.url) {
-                      window.location.href = data.url;
-                      return;
-                    }
-
-                    setError(data.error || "Unable to start promo checkout.");
-                  } catch {
-                    setError("Network error. Please try again.");
-                  } finally {
-                    setLoading(false);
-                  }
-                }}
-                className="promo-card__button"
-              >
-                {loading ? "Redirecting..." : "15 Days Pass"}
-                <div className="promo-card__button-subtitle">
-                  5 Day Trial • USD 30 • Any Time
+            <section id="how-it-works" className="circle-section circle-section--steps">
+              <div className="circle-section__inner">
+                <p className="circle-section__eyebrow">How it works</p>
+                <div className="circle-steps">
+                  <article className="circle-step">
+                    <span className="circle-step__number">01 — Apply</span>
+                    <h3 className="circle-step__title">Apply</h3>
+                    <p className="circle-step__text">Request access</p>
+                  </article>
+                  <article className="circle-step">
+                    <span className="circle-step__number">02 — Recognised</span>
+                    <h3 className="circle-step__title">Recognised</h3>
+                    <p className="circle-step__text">Across partner venues</p>
+                  </article>
+                  <article className="circle-step">
+                    <span className="circle-step__number">03 — Enjoy</span>
+                    <h3 className="circle-step__title">Enjoy</h3>
+                    <p className="circle-step__text">Benefits and community</p>
+                  </article>
                 </div>
-              </button>
-              {error && <div className="promo-card__error">{error}</div>}
-            </div>
+              </div>
+            </section>
+
+            <section className="circle-section circle-section--venues">
+              <div className="circle-section__inner">
+                <p className="circle-section__eyebrow">Recognised across</p>
+                <h2 className="circle-section__title">Recognised across Ahangama</h2>
+                <p className="circle-section__subtle">Selected places</p>
+                <div className="circle-venues" aria-label="Selected partners">
+                  {partnerVenues.map((venue) => (
+                    <span key={venue} className="circle-venues__item">
+                      {venue}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section id="membership" className="circle-section circle-section--membership">
+              <div className="circle-section__inner circle-section__inner--centered">
+                <p className="circle-section__eyebrow">Membership</p>
+                <h2 className="circle-section__title">Membership</h2>
+                <h2 className="circle-membership__price">$250 / year</h2>
+                <p className="circle-section__body circle-section__body--membership">
+                  Founding Members — limited
+                  <br />
+                  A small number will be invited to join with a complimentary
+                  first year
+                </p>
+                <p className="circle-section__subtle">By inquiry only</p>
+                <a href={inquiryUrl} className="circle-cta circle-cta--primary">
+                  Request access
+                </a>
+              </div>
+            </section>
+
+            <section id="final-cta" className="circle-section circle-section--final-cta">
+              <div className="circle-section__inner circle-section__inner--centered circle-final-cta">
+                <p className="circle-section__eyebrow">Ahangama Circle</p>
+                <h2 className="circle-section__title">Join the Circle</h2>
+                <p className="circle-section__subtle">
+                  For those building, creating, and calling Ahangama home
+                </p>
+                <a href={inquiryUrl} className="circle-cta circle-cta--inverted">
+                  Request access
+                </a>
+              </div>
+            </section>
           </div>
         )}
       </div>
