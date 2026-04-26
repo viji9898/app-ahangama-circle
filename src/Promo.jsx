@@ -27,14 +27,24 @@ function subtractUtcDays(dateValue, days) {
 }
 
 export default function Promo() {
-  const inquiryUrl =
-    "mailto:hello@ahangama.com?subject=Ahangama%20Circle%20Membership%20Inquiry";
+  const inquiryUrl = "#join-circle";
   const heroAssets = {
     heroPassImage: "/assets/hero_pass_apple_wallet.png",
   };
   const [error, setError] = React.useState("");
   const [successLoading, setSuccessLoading] = React.useState(false);
   const [promoStatus, setPromoStatus] = React.useState(null);
+  const [requestAccessState, setRequestAccessState] = React.useState({
+    name: "",
+    email: "",
+    mobile: "",
+    memberType: "owner",
+    venueName: "",
+  });
+  const [requestAccessError, setRequestAccessError] = React.useState("");
+  const [requestAccessSuccess, setRequestAccessSuccess] = React.useState("");
+  const [requestAccessSubmitting, setRequestAccessSubmitting] =
+    React.useState(false);
   const partnerVenues = [
     "The Kip",
     "Cactus",
@@ -114,6 +124,79 @@ export default function Promo() {
       window.clearTimeout(retryTimeoutId);
     };
   }, []);
+
+  const isOwnerRequest = requestAccessState.memberType === "owner";
+
+  const handleRequestAccessChange = (event) => {
+    const { name, value } = event.target;
+
+    setRequestAccessState((currentState) => ({
+      ...currentState,
+      [name]: value,
+      ...(name === "memberType" && value !== "owner" ? { venueName: "" } : {}),
+    }));
+  };
+
+  const handleRequestAccessSubmit = async (event) => {
+    event.preventDefault();
+
+    setRequestAccessError("");
+    setRequestAccessSuccess("");
+
+    if (
+      !requestAccessState.name ||
+      !requestAccessState.email ||
+      !requestAccessState.mobile ||
+      !requestAccessState.memberType
+    ) {
+      setRequestAccessError("Please complete all required fields.");
+      return;
+    }
+
+    if (isOwnerRequest && !requestAccessState.venueName.trim()) {
+      setRequestAccessError("Please add the venue name for owner applications.");
+      return;
+    }
+
+    setRequestAccessSubmitting(true);
+
+    try {
+      const response = await fetch("/.netlify/functions/request-access", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: requestAccessState.name.trim(),
+          email: requestAccessState.email.trim(),
+          mobile: requestAccessState.mobile.trim(),
+          memberType: requestAccessState.memberType,
+          venueName: requestAccessState.venueName.trim(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        throw new Error(data.error || "Failed to send request.");
+      }
+
+      setRequestAccessSuccess("Request received. The concierge team will be in touch.");
+      setRequestAccessState({
+        name: "",
+        email: "",
+        mobile: "",
+        memberType: "owner",
+        venueName: "",
+      });
+    } catch (submitError) {
+      setRequestAccessError(
+        submitError.message || "Failed to send request. Please try again.",
+      );
+    } finally {
+      setRequestAccessSubmitting(false);
+    }
+  };
 
   const isSuccessView = Boolean(promoStatus) || successLoading;
 
@@ -321,18 +404,104 @@ export default function Promo() {
               id="final-cta"
               className="circle-section circle-section--final-cta"
             >
-              <div className="circle-section__inner circle-section__inner--centered circle-final-cta">
+              <div
+                id="join-circle"
+                className="circle-section__inner circle-section__inner--centered circle-final-cta"
+              >
                 <p className="circle-section__eyebrow">Ahangama Circle</p>
                 <h2 className="circle-section__title">Join the Circle</h2>
                 <p className="circle-section__subtle">
                   For those building, creating, and calling Ahangama home
                 </p>
-                <a
-                  href={inquiryUrl}
-                  className="circle-cta circle-cta--inverted"
+                <form
+                  className="circle-form"
+                  onSubmit={handleRequestAccessSubmit}
                 >
-                  Request access
-                </a>
+                  <div className="circle-form__grid">
+                    <label className="circle-form__field">
+                      <span className="circle-form__label">Name</span>
+                      <input
+                        className="circle-form__input"
+                        type="text"
+                        name="name"
+                        value={requestAccessState.name}
+                        onChange={handleRequestAccessChange}
+                        autoComplete="name"
+                        required
+                      />
+                    </label>
+                    <label className="circle-form__field">
+                      <span className="circle-form__label">Email</span>
+                      <input
+                        className="circle-form__input"
+                        type="email"
+                        name="email"
+                        value={requestAccessState.email}
+                        onChange={handleRequestAccessChange}
+                        autoComplete="email"
+                        required
+                      />
+                    </label>
+                    <label className="circle-form__field">
+                      <span className="circle-form__label">Mobile</span>
+                      <input
+                        className="circle-form__input"
+                        type="tel"
+                        name="mobile"
+                        value={requestAccessState.mobile}
+                        onChange={handleRequestAccessChange}
+                        autoComplete="tel"
+                        required
+                      />
+                    </label>
+                    <label className="circle-form__field">
+                      <span className="circle-form__label">I am</span>
+                      <select
+                        className="circle-form__input circle-form__input--select"
+                        name="memberType"
+                        value={requestAccessState.memberType}
+                        onChange={handleRequestAccessChange}
+                        required
+                      >
+                        <option value="owner">Owner</option>
+                        <option value="creative">Creative</option>
+                        <option value="founder">Founder</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </label>
+                    {isOwnerRequest && (
+                      <label className="circle-form__field circle-form__field--full">
+                        <span className="circle-form__label">Venue name</span>
+                        <input
+                          className="circle-form__input"
+                          type="text"
+                          name="venueName"
+                          value={requestAccessState.venueName}
+                          onChange={handleRequestAccessChange}
+                          autoComplete="organization"
+                          required={isOwnerRequest}
+                        />
+                      </label>
+                    )}
+                  </div>
+                  <button
+                    type="submit"
+                    className="circle-cta circle-cta--inverted circle-form__submit"
+                    disabled={requestAccessSubmitting}
+                  >
+                    {requestAccessSubmitting ? "Sending..." : "Request access"}
+                  </button>
+                  {requestAccessError && (
+                    <p className="circle-form__status circle-form__status--error">
+                      {requestAccessError}
+                    </p>
+                  )}
+                  {requestAccessSuccess && (
+                    <p className="circle-form__status circle-form__status--success">
+                      {requestAccessSuccess}
+                    </p>
+                  )}
+                </form>
                 <p className="circle-cta__microcopy">
                   Handled privately via concierge
                 </p>
