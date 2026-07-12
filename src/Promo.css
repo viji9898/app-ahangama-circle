@@ -457,10 +457,34 @@
   appearance: none;
 }
 
+.circle-form__input--textarea {
+  min-height: 136px;
+  padding-top: 16px;
+  resize: vertical;
+}
+
 .circle-form__submit {
   min-width: 180px;
   margin-top: 28px;
   cursor: pointer;
+}
+
+.join-page {
+  justify-content: center;
+}
+
+.join-page__section {
+  width: 100%;
+  max-width: 980px;
+  padding-top: 72px;
+}
+
+.join-page__panel {
+  margin: 0 auto;
+}
+
+.join-page__wallet-link {
+  margin-left: 14px;
 }
 
 .circle-form__submit:disabled {

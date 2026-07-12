@@ -1,13 +1,15 @@
 import crypto from "crypto";
 import Stripe from "stripe";
 import { neon } from "@neondatabase/serverless";
+import { createSmartPassLink } from "./passkitSmartPassLink.js";
 
 const stripe = new Stripe(
   process.env.NODE_ENV === "development"
     ? process.env.STRIPE_SECRET_KEY_TEST
     : process.env.STRIPE_SECRET_KEY_LIVE,
 );
-const PASSKIT_SMARTPASS_SECRET = process.env.PASSKIT_SMARTPASS_SECRET;
+const PASSKIT_DISTRIBUTION_URL = process.env.PASSKIT_DISTRIBUTION_URL;
+const PASSKIT_SMARTPASS_KEY = process.env.PASSKIT_SMARTPASS_KEY;
 const PASS_EXTERNAL_BASE_URL = "https://pass.ahangama.com";
 
 function generatePassCode(seed, length = 12) {
@@ -59,45 +61,31 @@ async function createPromoSmartPassLink({
   passkitPassId,
   paidEndAt,
 }) {
-  if (!PASSKIT_SMARTPASS_SECRET || !paidEndAt) return null;
-
-  const response = await fetch(
-    "https://api.pub1.passkit.io/distribution/smartpasslink",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${PASSKIT_SMARTPASS_SECRET}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        projectDistributionUrl: {
-          url: "https://pub1.pskt.io/c/5cb4m9",
-          title: "Ahangama Pass",
-        },
-        fields: {
-          "members.program.name": "Ahangama Pass 2026",
-          "members.member.points": "120",
-          "members.tier.name": "Base",
-          "members.member.status": "ACTIVE",
-          "members.member.externalId": `${PASS_EXTERNAL_BASE_URL}/pv?id=${passkitPassId}`,
-          "person.displayName": passHolderName || "Ahangama Pass Holder",
-          "person.surname": "",
-          "person.emailAddress": customerEmail || "",
-          "person.mobileNumber": customerPhone || "",
-          "universal.info": "Valid at all participating Ahangama Pass venues.",
-          "universal.expiryDate": toColomboIsoString(new Date(paidEndAt)),
-        },
-      }),
-    },
-  );
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`PassKit request failed: ${response.status} ${errorText}`);
+  if (
+    !PASSKIT_DISTRIBUTION_URL ||
+    !PASSKIT_SMARTPASS_KEY ||
+    !paidEndAt
+  ) {
+    return null;
   }
 
-  const data = await response.json();
-  return data?.url || null;
+  return createSmartPassLink({
+    distributionUrl: PASSKIT_DISTRIBUTION_URL,
+    encryptionKey: PASSKIT_SMARTPASS_KEY,
+    fields: {
+      "members.program.name": "Ahangama Pass 2026",
+      "members.member.points": "120",
+      "members.member.status": "ACTIVE",
+      "members.member.externalId": `${PASS_EXTERNAL_BASE_URL}/pv?id=${passkitPassId}`,
+      "person.displayName": passHolderName || "Ahangama Pass Holder",
+      "person.surname": "",
+      "person.emailAddress": customerEmail || "",
+      "person.mobileNumber": customerPhone || "",
+      "meta.venue": "-",
+      "universal.info": "Valid at all participating Ahangama Pass venues.",
+      "universal.expiryDate": toColomboIsoString(new Date(paidEndAt)),
+    },
+  });
 }
 
 async function isSmartLinkHealthy(url) {

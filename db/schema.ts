@@ -40,3 +40,31 @@ export const promoSubscriptions = pgTable("promo_subscriptions", {
     .defaultNow()
     .notNull(),
 });
+
+export const circle = pgTable("circle", {
+  id: uuid("id").defaultRandom().primaryKey(),
+
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  mobile: text("mobile").notNull(),
+  memberType: text("member_type").notNull(),
+  venueName: text("venue_name"),
+  perksPrivileges: text("perks_privileges"),
+
+  passType: text("pass_type").notNull().default("complimentary"),
+  passStatus: text("pass_status").notNull().default("active"),
+  passkitPassId: text("passkit_pass_id").unique(),
+  smartLinkUrl: text("smart_link_url"),
+  validFrom: timestamp("valid_from", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  validUntil: timestamp("valid_until", { withTimezone: true }),
+  emailSentAt: timestamp("email_sent_at", { withTimezone: true }),
+
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});

@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS "circle" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"name" text NOT NULL,
+	"email" text NOT NULL,
+	"mobile" text NOT NULL,
+	"member_type" text NOT NULL,
+	"venue_name" text,
+	"perks_privileges" text,
+	"pass_type" text DEFAULT 'complimentary' NOT NULL,
+	"pass_status" text DEFAULT 'active' NOT NULL,
+	"passkit_pass_id" text,
+	"smart_link_url" text,
+	"valid_from" timestamp with time zone DEFAULT now() NOT NULL,
+	"valid_until" timestamp with time zone,
+	"email_sent_at" timestamp with time zone,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	CONSTRAINT "circle_email_unique" UNIQUE("email"),
+	CONSTRAINT "circle_passkit_pass_id_unique" UNIQUE("passkit_pass_id")
+);

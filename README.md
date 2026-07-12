@@ -20,6 +20,8 @@ Promo-only web app extracted from the Ahangama Pass promo flow.
 - `STRIPE_PROMO_PRICE_15_TEST`
 - `STRIPE_PROMO_PRICE_15`
 - `STRIPE_PROMO_WEBHOOK_SECRET`
+- `PASSKIT_DISTRIBUTION_URL`
+- `PASSKIT_SMARTPASS_KEY` - PassKit project encryption key for SmartPass links
 - `PASSKIT_SMARTPASS_SECRET`
 - `SENDGRID_API_KEY`
 - `PROMO_TRIAL_DAYS`

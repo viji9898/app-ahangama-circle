@@ -18,6 +18,15 @@ function subtractUtcDays(dateValue, days) {
   return date;
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 async function sendPromoTrialEmail({
   customerEmail,
   passHolderName,
@@ -98,4 +107,45 @@ async function sendPromoPaidEmail({
   });
 }
 
-export { sendPromoTrialEmail, sendPromoPaidEmail };
+async function sendCirclePassEmail({
+  customerEmail,
+  passHolderName,
+  smartLinkUrl,
+  passkitPassId,
+  venueName,
+  validUntil,
+}) {
+  const subject = "Your Ahangama Circle Pass Is Ready";
+  const safeName = escapeHtml(passHolderName || "Ahangama Circle Member");
+  const safeVenueName = escapeHtml(venueName || "-");
+  const safeSmartLinkUrl = escapeHtml(smartLinkUrl);
+  const safePasskitPassId = escapeHtml(passkitPassId || "-");
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+      </head>
+      <body>
+        <div>
+          <h1>Your Circle Pass Is Ready</h1>
+          <p>Dear ${safeName},</p>
+          <p>Your complimentary Ahangama Circle pass is ready to add to your wallet.</p>
+          <p><strong>Venue:</strong> ${safeVenueName}</p>
+          <p><strong>Valid Until:</strong> ${formatColomboDate(validUntil)}</p>
+          <p><strong>Circle Pass ID:</strong> ${safePasskitPassId}</p>
+          <p><a href="${safeSmartLinkUrl}">Add your Circle Pass to wallet</a></p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await sgMail.send({
+    to: customerEmail,
+    from: "hello@ahangama.com",
+    subject,
+    html,
+  });
+}
+
+export { sendCirclePassEmail, sendPromoPaidEmail, sendPromoTrialEmail };
