@@ -487,6 +487,91 @@
   margin-left: 14px;
 }
 
+.circle-verify-page__content {
+  padding-top: 4em;
+}
+
+.circle-verify-card {
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 64px 40px;
+  text-align: center;
+}
+
+.circle-verify-card__title {
+  margin: 0 auto;
+  max-width: 9ch;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: clamp(42px, 8vw, 76px);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+}
+
+.circle-verify-card__loading,
+.circle-verify-card__error,
+.circle-verify-card__status {
+  margin-top: 28px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.circle-verify-card__loading {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.circle-verify-card__error {
+  color: #ff8d8d;
+}
+
+.circle-verify-card__details {
+  display: grid;
+  gap: 0;
+  margin-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+.circle-verify-card__detail {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.circle-verify-card__detail span {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.circle-verify-card__detail strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 17px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.circle-verify-card__detail--primary {
+  display: block;
+}
+
+.circle-verify-card__detail--primary strong {
+  display: block;
+  margin-top: 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1;
+  text-align: left;
+}
+
 .circle-form__submit:disabled {
   cursor: wait;
   opacity: 0.7;
@@ -547,6 +632,20 @@
 
   .circle-final-cta {
     padding: 64px 24px;
+  }
+
+  .circle-verify-card {
+    padding: 52px 24px;
+  }
+
+  .circle-verify-card__detail {
+    display: block;
+  }
+
+  .circle-verify-card__detail strong {
+    display: block;
+    margin-top: 6px;
+    text-align: left;
   }
 
   .circle-form__grid {

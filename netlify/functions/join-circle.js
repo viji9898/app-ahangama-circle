@@ -5,7 +5,7 @@ import { createSmartPassLink } from "./passkitSmartPassLink.js";
 
 const PASSKIT_DISTRIBUTION_URL = process.env.PASSKIT_DISTRIBUTION_URL;
 const PASSKIT_SMARTPASS_KEY = process.env.PASSKIT_SMARTPASS_KEY;
-const PASS_EXTERNAL_BASE_URL = "https://pass.ahangama.com";
+const PASS_EXTERNAL_BASE_URL = "https://circle.ahangama.com";
 const CIRCLE_PASS_VALID_DAYS = Number(
   process.env.CIRCLE_PASS_VALID_DAYS || 365,
 );

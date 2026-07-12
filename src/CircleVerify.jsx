@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./Promo.css";
 
 export default function CircleVerify() {
   const [status, setStatus] = useState(null);
@@ -39,69 +40,68 @@ export default function CircleVerify() {
     return "#e74c3c";
   }
 
+  function shouldShowVenue(venueName) {
+    const normalizedVenueName = String(venueName || "").trim();
+    return normalizedVenueName && normalizedVenueName !== "-";
+  }
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        width: "100vw",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background:
-          "url('/background.jpg') center center / cover no-repeat fixed, #f7f3ef",
-        fontFamily: "Inter, Helvetica, Arial, sans-serif",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 420,
-          background: "#fff",
-          borderRadius: 18,
-          boxShadow: "0 2px 16px #0001",
-          padding: "2em 1.25em 1.5em 1.25em",
-          textAlign: "center",
-        }}
-      >
-        <h2 style={{ margin: 0, fontWeight: 700, color: "#8B4513" }}>
-          Verify Circle Pass
-        </h2>
+    <div className="promo-page circle-verify-page">
+      <div className="promo-page__background" />
+      <main className="promo-page__content promo-page__content--success circle-verify-page__content">
+        <section className="circle-verify-card">
+          <p className="circle-section__eyebrow">Ahangama Circle</p>
+          <h1 className="circle-verify-card__title">Verify Circle Pass</h1>
         {loading && (
-          <div style={{ color: "#8B4513", fontWeight: 600, marginTop: 16 }}>
+          <div className="circle-verify-card__loading">
             Checking...
           </div>
         )}
         {error && (
-          <div style={{ color: "#e74c3c", fontWeight: 600, marginTop: 16 }}>
+          <div className="circle-verify-card__error">
             {error}
           </div>
         )}
         {status && (
           <>
             <div
-              style={{
-                color: renderStatusColor(),
-                fontWeight: 700,
-                fontSize: 22,
-                margin: "1em 0",
-              }}
+              className="circle-verify-card__status"
+              style={{ color: renderStatusColor() }}
             >
               {renderStatusMessage()}
             </div>
-            <div style={{ color: "#6d4c2b", fontSize: 15, lineHeight: 1.6 }}>
-              <div>Pass Status: {status.pass_status}</div>
-              <div>Pass Type: {status.pass_type}</div>
-              <div>Venue: {status.venue_name || "-"}</div>
-              <div>
-                Valid Until:{" "}
-                {status.valid_until
-                  ? new Date(status.valid_until).toLocaleDateString()
-                  : "-"}
+            <div className="circle-verify-card__details">
+              <div className="circle-verify-card__detail circle-verify-card__detail--primary">
+                <span>Name</span>
+                <strong>{status.name || "Ahangama Circle Member"}</strong>
+              </div>
+              <div className="circle-verify-card__detail">
+                <span>Pass Status</span>
+                <strong>{status.pass_status}</strong>
+              </div>
+              <div className="circle-verify-card__detail">
+                <span>Pass Type</span>
+                <strong>{status.pass_type}</strong>
+              </div>
+              {shouldShowVenue(status.venue_name) && (
+                <div className="circle-verify-card__detail">
+                  <span>Venue</span>
+                  <strong>{status.venue_name}</strong>
+                </div>
+              )}
+              <div className="circle-verify-card__detail">
+                <span>Valid Until</span>
+                <strong>
+                  {status.valid_until
+                    ? new Date(status.valid_until).toLocaleDateString()
+                    : "-"}
+                </strong>
               </div>
             </div>
           </>
         )}
-      </div>
+        </section>
+      </main>
     </div>
   );
 }
