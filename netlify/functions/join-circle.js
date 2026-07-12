@@ -6,7 +6,9 @@ import { createSmartPassLink } from "./passkitSmartPassLink.js";
 const PASSKIT_DISTRIBUTION_URL = process.env.PASSKIT_DISTRIBUTION_URL;
 const PASSKIT_SMARTPASS_KEY = process.env.PASSKIT_SMARTPASS_KEY;
 const PASS_EXTERNAL_BASE_URL = "https://pass.ahangama.com";
-const CIRCLE_PASS_VALID_DAYS = Number(process.env.CIRCLE_PASS_VALID_DAYS || 365);
+const CIRCLE_PASS_VALID_DAYS = Number(
+  process.env.CIRCLE_PASS_VALID_DAYS || 365,
+);
 
 function json(status, body) {
   return new Response(JSON.stringify(body), {
@@ -192,6 +194,8 @@ export default async (req) => {
     });
   } catch (error) {
     console.error("join-circle error:", error);
-    return json(500, { error: error.message || "Failed to create Circle pass" });
+    return json(500, {
+      error: error.message || "Failed to create Circle pass",
+    });
   }
 };

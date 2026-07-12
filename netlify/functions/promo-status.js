@@ -61,11 +61,7 @@ async function createPromoSmartPassLink({
   passkitPassId,
   paidEndAt,
 }) {
-  if (
-    !PASSKIT_DISTRIBUTION_URL ||
-    !PASSKIT_SMARTPASS_KEY ||
-    !paidEndAt
-  ) {
+  if (!PASSKIT_DISTRIBUTION_URL || !PASSKIT_SMARTPASS_KEY || !paidEndAt) {
     return null;
   }
 
@@ -116,7 +112,8 @@ async function ensureWorkingPromoSmartLink(sql, subscription) {
         subscription.stripeCheckoutSessionId,
     );
   const regeneratedSmartLinkUrl = await createPromoSmartPassLink({
-    passHolderName: subscription.pass_holder_name || subscription.passHolderName,
+    passHolderName:
+      subscription.pass_holder_name || subscription.passHolderName,
     customerEmail: subscription.customer_email || subscription.customerEmail,
     customerPhone: subscription.customer_phone || subscription.customerPhone,
     passkitPassId,
@@ -191,12 +188,15 @@ async function hydratePromoSubscription(sql, sessionId) {
 
   const trialStartAt =
     metadata.trial_start_at || colomboMidnightUtcIso(metadata.start_date);
-  const paidStartAt = metadata.first_charge_at || unixToIso(subscription?.trial_end);
+  const paidStartAt =
+    metadata.first_charge_at || unixToIso(subscription?.trial_end);
   const paidEndAt = metadata.paid_end_date
     ? colomboEndOfDayUtcIso(metadata.paid_end_date)
     : null;
   const cancelAt =
-    unixToIso(subscription?.cancel_at) || metadata.planned_cancel_at || paidEndAt;
+    unixToIso(subscription?.cancel_at) ||
+    metadata.planned_cancel_at ||
+    paidEndAt;
 
   if (!trialStartAt || !paidStartAt || !paidEndAt || !cancelAt) {
     return null;
@@ -335,6 +335,9 @@ export default async (req) => {
     return json(200, mapPromoRecord(hydratedSubscription));
   }
 
-  const repairedSubscription = await ensureWorkingPromoSmartLink(sql, subscription);
+  const repairedSubscription = await ensureWorkingPromoSmartLink(
+    sql,
+    subscription,
+  );
   return json(200, mapPromoRecord(repairedSubscription));
 };

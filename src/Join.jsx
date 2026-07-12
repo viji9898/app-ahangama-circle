@@ -31,9 +31,7 @@ export default function Join() {
     setFormState((currentState) => ({
       ...currentState,
       [name]: value,
-      ...(name === "memberType" && value !== "owner"
-        ? { venueName: "" }
-        : {}),
+      ...(name === "memberType" && value !== "owner" ? { venueName: "" } : {}),
     }));
   };
 
@@ -104,7 +102,8 @@ export default function Join() {
       });
     } catch (submitError) {
       setError(
-        submitError.message || "Failed to create your Circle pass. Please try again.",
+        submitError.message ||
+          "Failed to create your Circle pass. Please try again.",
       );
     } finally {
       setSubmitting(false);

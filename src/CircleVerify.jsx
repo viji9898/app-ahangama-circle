@@ -15,7 +15,9 @@ export default function CircleVerify() {
       return;
     }
 
-    fetch(`/.netlify/functions/verify-circle-pass?id=${encodeURIComponent(passId)}`)
+    fetch(
+      `/.netlify/functions/verify-circle-pass?id=${encodeURIComponent(passId)}`,
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.error) setError(data.error);

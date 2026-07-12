@@ -97,7 +97,9 @@ async function retrieveSubscription(subscriptionId) {
 
 async function ensureSubscriptionCancelAt(subscriptionId, plannedCancelAtIso) {
   if (!subscriptionId || !plannedCancelAtIso) return null;
-  const cancelAtUnix = Math.floor(new Date(plannedCancelAtIso).getTime() / 1000);
+  const cancelAtUnix = Math.floor(
+    new Date(plannedCancelAtIso).getTime() / 1000,
+  );
   if (!Number.isFinite(cancelAtUnix)) return null;
 
   try {
@@ -364,7 +366,10 @@ export default async (req) => {
   try {
     event = stripe.webhooks.constructEvent(rawBody, signature, endpointSecret);
   } catch (error) {
-    console.error("promo webhook signature verification failed:", error.message);
+    console.error(
+      "promo webhook signature verification failed:",
+      error.message,
+    );
     return new Response(`Webhook Error: ${error.message}`, { status: 400 });
   }
 
@@ -399,7 +404,11 @@ export default async (req) => {
       case "invoice.paid": {
         const invoice = event.data.object;
         if ((invoice.amount_paid || 0) > 0) {
-          const record = await updateFromInvoice(invoice, "active_paid", "active");
+          const record = await updateFromInvoice(
+            invoice,
+            "active_paid",
+            "active",
+          );
           if (
             record?.customer_email &&
             record?.smart_link_url &&
@@ -425,7 +434,11 @@ export default async (req) => {
         break;
       }
       case "invoice.payment_failed": {
-        await updateFromInvoice(event.data.object, "payment_failed_review", "manual_review");
+        await updateFromInvoice(
+          event.data.object,
+          "payment_failed_review",
+          "manual_review",
+        );
         break;
       }
       case "customer.subscription.deleted": {
