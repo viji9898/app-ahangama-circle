@@ -373,16 +373,8 @@ async function sendCirclePassEmail({
                 <td style="padding:9px 20px 10px;background:#f3f3f3;border-bottom:2px solid #111;">
                   <div style="font-family:Arial,sans-serif;font-size:12px;line-height:1.55;font-weight:700;color:#111;">
                     <span style="color:${ACCENT};">PASS:</span> Complimentary Circle access<br />
-                    <span style="color:${ACCENT};">FEATURED ARTICLES:</span> ${FEATURED_ARTICLES.length} featured articles<br />
-                    <span style="color:${ACCENT};">EVENTS:</span> ${WELCOME_EVENTS.length} event
+                    <span style="color:${ACCENT};">FEATURED ARTICLES:</span> ${FEATURED_ARTICLES.length} featured articles
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:18px 20px 8px;">
-                  <div style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:${ACCENT};margin-bottom:6px;">What&rsquo;s On</div>
-                  <div style="font-family:Georgia,'Times New Roman',serif;font-size:30px;line-height:.98;font-weight:700;color:#242424;">This Week</div>
-                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:12px;">${WELCOME_EVENTS.map((event) => buildEventHtml(event)).join("")}</table>
                 </td>
               </tr>
               <tr>
@@ -424,12 +416,6 @@ async function sendCirclePassEmail({
     "",
     "The Ahangama Minute",
     "Physically I'm here. Mentally I'm in a pool in Ahangama ordering my third arrack cocktail.",
-    "",
-    "WHAT'S ON",
-    ...WELCOME_EVENTS.map(
-      (event) =>
-        `${event.date}: ${event.title} at ${event.venue} - ${event.time}`,
-    ),
     "",
     "WORTH READING",
     ...FEATURED_ARTICLES.map((article) => article.title),
