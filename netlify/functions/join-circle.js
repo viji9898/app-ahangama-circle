@@ -23,11 +23,11 @@ function generatePassCode(seed, length = 12) {
     .slice(0, length);
 }
 
-function toColomboIsoString(date) {
+function formatColomboYmd(date) {
   const offsetMs = 5.5 * 60 * 60 * 1000;
   const local = new Date(date.getTime() + offsetMs);
   const pad = (value) => String(value).padStart(2, "0");
-  return `${local.getUTCFullYear()}-${pad(local.getUTCMonth() + 1)}-${pad(local.getUTCDate())}T${pad(local.getUTCHours())}:${pad(local.getUTCMinutes())}:${pad(local.getUTCSeconds())}+05:30`;
+  return `${local.getUTCFullYear()}-${pad(local.getUTCMonth() + 1)}-${pad(local.getUTCDate())}`;
 }
 
 function addUtcDays(date, days) {
@@ -71,7 +71,7 @@ async function createCircleSmartPassLink({
       "person.mobileNumber": mobile || "",
       "meta.venue": venueName || "-",
       "universal.info": passInfo,
-      "universal.expiryDate": toColomboIsoString(validUntil),
+      "universal.expiryDate": formatColomboYmd(validUntil),
     },
   });
 }

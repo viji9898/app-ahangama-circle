@@ -78,11 +78,11 @@ function unixToIso(unixSeconds) {
   return new Date(unixSeconds * 1000).toISOString();
 }
 
-function toColomboIsoString(date) {
+function formatColomboYmd(date) {
   const offsetMs = 5.5 * 60 * 60 * 1000;
   const local = new Date(date.getTime() + offsetMs);
   const pad = (value) => String(value).padStart(2, "0");
-  return `${local.getUTCFullYear()}-${pad(local.getUTCMonth() + 1)}-${pad(local.getUTCDate())}T${pad(local.getUTCHours())}:${pad(local.getUTCMinutes())}:${pad(local.getUTCSeconds())}+05:30`;
+  return `${local.getUTCFullYear()}-${pad(local.getUTCMonth() + 1)}-${pad(local.getUTCDate())}`;
 }
 
 async function retrieveSubscription(subscriptionId) {
@@ -139,7 +139,7 @@ async function createPromoSmartPassLink({
       "person.mobileNumber": customerPhone || "",
       "meta.venue": "-",
       "universal.info": "Valid at all participating Ahangama Pass venues.",
-      "universal.expiryDate": toColomboIsoString(new Date(paidEndAt)),
+      "universal.expiryDate": formatColomboYmd(new Date(paidEndAt)),
     },
   });
 }
