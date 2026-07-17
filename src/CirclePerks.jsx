@@ -1,6 +1,28 @@
 import React from "react";
 import "./CirclePerks.css";
 
+const PERKS_META = {
+  title: "Ahangama Circle Member Perks",
+  description:
+    "Explore Ahangama Circle member perks, discounts, and privileges from participating venues across Ahangama and the south coast.",
+  url: "https://circle.ahangama.com/perks",
+  image:
+    "https://customer-apps-techhq.s3.eu-west-2.amazonaws.com/app-ahangama-demo/circle-member-perks.jpg",
+};
+
+function setMeta(selector, attributes) {
+  let element = document.head.querySelector(selector);
+
+  if (!element) {
+    element = document.createElement("meta");
+    document.head.appendChild(element);
+  }
+
+  Object.entries(attributes).forEach(([name, value]) => {
+    element.setAttribute(name, value);
+  });
+}
+
 function buildInstagramUrl(instagram) {
   if (!instagram) return "";
   const normalized = instagram.trim();
@@ -67,6 +89,43 @@ export default function CirclePerks() {
   const [venues, setVenues] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    document.title = PERKS_META.title;
+
+    setMeta('meta[name="description"]', {
+      name: "description",
+      content: PERKS_META.description,
+    });
+    setMeta('meta[property="og:title"]', {
+      property: "og:title",
+      content: PERKS_META.title,
+    });
+    setMeta('meta[property="og:description"]', {
+      property: "og:description",
+      content: PERKS_META.description,
+    });
+    setMeta('meta[property="og:url"]', {
+      property: "og:url",
+      content: PERKS_META.url,
+    });
+    setMeta('meta[property="og:image"]', {
+      property: "og:image",
+      content: PERKS_META.image,
+    });
+    setMeta('meta[name="twitter:title"]', {
+      name: "twitter:title",
+      content: PERKS_META.title,
+    });
+    setMeta('meta[name="twitter:description"]', {
+      name: "twitter:description",
+      content: PERKS_META.description,
+    });
+    setMeta('meta[name="twitter:image"]', {
+      name: "twitter:image",
+      content: PERKS_META.image,
+    });
+  }, []);
 
   React.useEffect(() => {
     let isActive = true;

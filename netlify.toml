@@ -9,6 +9,10 @@
   port = 8889
   targetPort = 5173
 
+[[edge_functions]]
+  path = "/perks"
+  function = "perks-meta"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
