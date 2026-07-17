@@ -28,15 +28,6 @@ function VenueCard({ venue }) {
 
   return (
     <article className="circle-perks-card">
-      <div className="circle-perks-card__media">
-        {venue.image ? (
-          <img src={venue.image} alt="" className="circle-perks-card__image" loading="lazy" />
-        ) : (
-          <div className="circle-perks-card__image circle-perks-card__image--placeholder" />
-        )}
-        <div className="circle-perks-card__perk">{perkText}</div>
-      </div>
-
       <div className="circle-perks-card__body">
         <div className="circle-perks-card__header">
           {venue.logo && <img src={venue.logo} alt="" className="circle-perks-card__logo" loading="lazy" />}
@@ -48,28 +39,7 @@ function VenueCard({ venue }) {
           </div>
         </div>
 
-        <p className="circle-perks-card__excerpt">{venue.excerpt || venue.description}</p>
-
-        <dl className="circle-perks-card__details">
-          {venue.how_to_claim && (
-            <div>
-              <dt>Claim</dt>
-              <dd>{venue.how_to_claim}</dd>
-            </div>
-          )}
-          {venue.restrictions && (
-            <div>
-              <dt>Note</dt>
-              <dd>{venue.restrictions}</dd>
-            </div>
-          )}
-          {venue.hours && (
-            <div>
-              <dt>Hours</dt>
-              <dd>{venue.hours}</dd>
-            </div>
-          )}
-        </dl>
+        <div className="circle-perks-card__perk">{perkText}</div>
 
         <div className="circle-perks-card__actions">
           {venue.map_url && (
@@ -132,11 +102,7 @@ export default function CirclePerks() {
     <main className="circle-perks-page">
       <section className="circle-perks-hero">
         <div className="circle-perks-hero__content">
-          <p className="circle-perks-hero__eyebrow">Ahangama Circle</p>
           <h1 className="circle-perks-hero__title">Member Perks</h1>
-          <p className="circle-perks-hero__intro">
-            Offers, discounts, and privileges shared between Circle venues and pass holders.
-          </p>
         </div>
       </section>
 

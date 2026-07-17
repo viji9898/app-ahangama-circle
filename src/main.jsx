@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Promo />} />
-        <Route path="/circle-perks" element={<CirclePerks />} />
+        <Route path="/perks" element={<CirclePerks />} />
         <Route path="/cv" element={<CircleVerify />} />
         <Route path="/join" element={<Join />} />
         <Route path="/promo" element={<Promo />} />
