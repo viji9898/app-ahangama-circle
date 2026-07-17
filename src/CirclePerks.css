@@ -1,0 +1,226 @@
+.circle-perks-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(232, 190, 108, 0.24), transparent 32rem),
+    linear-gradient(145deg, #11110f 0%, #262116 48%, #eee5d3 48.2%, #f6efe2 100%);
+  color: #17130e;
+}
+
+.circle-perks-hero {
+  display: flex;
+  min-height: 42vh;
+  align-items: flex-end;
+  padding: 7rem clamp(1.25rem, 5vw, 5rem) 3rem;
+  color: #fffaf0;
+}
+
+.circle-perks-hero__content {
+  max-width: 760px;
+}
+
+.circle-perks-hero__eyebrow {
+  margin: 0 0 1rem;
+  color: rgba(255, 250, 240, 0.62);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.circle-perks-hero__title {
+  margin: 0;
+  color: #fff7df;
+  font-size: clamp(3.6rem, 10vw, 8.5rem);
+  font-weight: 650;
+  line-height: 0.88;
+}
+
+.circle-perks-hero__intro {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+  color: rgba(255, 250, 240, 0.76);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.circle-perks-list {
+  padding: 0 clamp(1rem, 4vw, 4rem) 5rem;
+}
+
+.circle-perks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1rem;
+  width: min(1320px, 100%);
+  margin: 0 auto;
+}
+
+.circle-perks-card {
+  display: grid;
+  min-height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(55, 42, 23, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 252, 244, 0.92);
+  box-shadow: 0 18px 48px rgba(31, 24, 14, 0.16);
+}
+
+.circle-perks-card__media {
+  position: relative;
+  min-height: 220px;
+  background: #2b261d;
+}
+
+.circle-perks-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.circle-perks-card__image--placeholder {
+  background: linear-gradient(135deg, #332b1e, #b99651);
+}
+
+.circle-perks-card__perk {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  border-radius: 8px;
+  background: rgba(16, 15, 12, 0.86);
+  padding: 0.8rem 0.9rem;
+  color: #fff8e5;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.circle-perks-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.circle-perks-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.circle-perks-card__logo {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.circle-perks-card__meta {
+  margin: 0 0 0.25rem;
+  color: rgba(23, 19, 14, 0.55);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.circle-perks-card__title {
+  margin: 0;
+  color: #19130c;
+  font-size: 1.35rem;
+  line-height: 1.05;
+}
+
+.circle-perks-card__excerpt {
+  margin: 0;
+  color: rgba(23, 19, 14, 0.72);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.circle-perks-card__details {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.circle-perks-card__details div {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.75rem;
+}
+
+.circle-perks-card__details dt {
+  color: rgba(23, 19, 14, 0.46);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.circle-perks-card__details dd {
+  margin: 0;
+  color: rgba(23, 19, 14, 0.78);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.circle-perks-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.circle-perks-card__button {
+  border: 1px solid rgba(23, 19, 14, 0.18);
+  border-radius: 999px;
+  padding: 0.62rem 0.9rem;
+  color: #23180f;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.circle-perks-card__button--primary {
+  border-color: #1f5f3a;
+  background: #1f5f3a;
+  color: #fff;
+}
+
+.circle-perks-status {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  border-radius: 8px;
+  background: rgba(255, 252, 244, 0.9);
+  padding: 1.25rem;
+  color: #271d12;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.circle-perks-status--error {
+  color: #9f2f1d;
+}
+
+@media (max-width: 720px) {
+  .circle-perks-page {
+    background:
+      radial-gradient(circle at 12% 8%, rgba(232, 190, 108, 0.2), transparent 22rem),
+      linear-gradient(160deg, #11110f 0%, #262116 38%, #eee5d3 38.2%, #f6efe2 100%);
+  }
+
+  .circle-perks-hero {
+    min-height: 36vh;
+    padding-top: 5rem;
+  }
+
+  .circle-perks-card__details div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
