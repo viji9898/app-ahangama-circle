@@ -404,7 +404,7 @@ export default function Promo() {
               <div className="circle-section__inner circle-section__inner--centered">
                 <p className="circle-section__eyebrow">Membership</p>
                 <h2 className="circle-section__title">Membership</h2>
-                <h2 className="circle-membership__price">$250 / year</h2>
+
                 <p className="circle-section__body circle-section__body--membership">
                   Founding Members — limited
                   <br />A small number will be invited to join with a
