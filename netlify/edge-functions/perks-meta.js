@@ -129,6 +129,8 @@ export default async (request, context) => {
 
   const html = await response.text();
   const headers = new Headers(response.headers);
+  headers.delete("content-encoding");
+  headers.delete("content-length");
   headers.set("content-type", "text/html; charset=utf-8");
 
   return new Response(applyPerksMeta(html), {
